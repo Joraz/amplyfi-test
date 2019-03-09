@@ -6,6 +6,9 @@ const mongodb = require('mongodb');
 const app = express();
 app.use(bodyParser.json());
 
+const distDirectory = __dirname + '/dist/';
+app.use(express.static(distDirectory));
+
 const carDataCollection = 'carData';
 
 /** @type {mongodb.Db}  */

@@ -6,7 +6,7 @@ const mongodb = require('mongodb');
 const app = express();
 app.use(bodyParser.json());
 
-const carDataCollection = 'car-data';
+const carDataCollection = 'carData';
 
 /** @type {mongodb.Db}  */
 let db;

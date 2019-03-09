@@ -27,7 +27,7 @@ mongodb.MongoClient.connect(
   }
 );
 
-app.get('/', (req, res) => {
+app.get('/api/query', (req, res) => {
   db.collection(carDataCollection)
     .find({})
     .toArray((err, docs) => {

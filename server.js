@@ -1,43 +1,25 @@
-const express = require('express');
-
 const bodyParser = require('body-parser');
-const mongodb = require('mongodb');
+const express = require('express');
+const expressMongo = require('express-mongo-db');
+
+const routes = require('./routes');
 
 const app = express();
 app.use(bodyParser.json());
 
+// middleware that appends a mongo db connection to each request
+app.use(
+  expressMongo(
+    process.env.MONGODB_URI || 'mongodb://localhost:27017/amplyfi-test'
+  )
+);
+
 const distDirectory = __dirname + '/dist/';
 app.use(express.static(distDirectory));
 
-const carDataCollection = 'carData';
+// Set up the api routes
+app.use('/api', routes);
 
-/** @type {mongodb.Db}  */
-let db;
-
-mongodb.MongoClient.connect(
-  process.env.MONGODB_URI || 'mongodb://localhost:27017/test',
-  (err, client) => {
-    if (err) {
-      console.error(err);
-      process.exit(1);
-    }
-
-    db = client.db();
-
-    const server = app.listen(process.env.PORT || 9090, () => {
-      console.log(`App now running on port ${server.address().port}`);
-    });
-  }
-);
-
-app.get('/api/query', (req, res) => {
-  db.collection(carDataCollection)
-    .find({})
-    .toArray((err, docs) => {
-      if (err) {
-        res.status(500).send(err.message);
-      } else {
-        res.status(200).json(docs);
-      }
-    });
+const server = app.listen(process.env.PORT || 9090, () => {
+  console.log(`App now running on port ${server.address().port}`);
 });

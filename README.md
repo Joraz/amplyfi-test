@@ -1,27 +1,24 @@
-# Amplyfi
+# Amplyfi Tech Test
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.5.
+### Installation
+Once you've cloned the repo, install dependencies with `npm install` or `yarn`, depending on your installed package manager.
 
-## Development server
+You will also require a version of MongoDB installed, and running.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Running locally
+The backend expressjs server expects data in a MongoDB database with a collection named `carData`. You can define the MongoDB connection URL with the environment variable `MONGODB_URI`. Otherwise, it will default to `mongodb://localhost:27017/amplyfi-test`.
 
-## Code scaffolding
+To start the app, run the `start` command (`npm start` | `yarn start`). The frontend Angular application will be built, then the server will start on port 9090.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### The application
+I have chosen to present some insights into the provided data by grouping datasets by location. The app presents a list of (max) 20 locations to choose from. These are the most-mentioned locations in the data sets.
 
-## Build
+Selecting a location will show 3 graphs. The data for this is obtained through MongoDB aggregations on the data, grouping matching keywords/sources/people based on the location provided.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+The gender graph uses a library to determine whether a person is male or female based on their name. This is, of course, not a foolproof method, and so the data here should be treated accordingly.
 
-## Running unit tests
+### Testing
+The Angular application comes with a suite of unit tests. These can be run locally with the command `npm test` or `yarn test`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### Hosting
+The app is hosted and available on Heroku. It can be found [here](https://afternoon-badlands-19749.herokuapp.com/)

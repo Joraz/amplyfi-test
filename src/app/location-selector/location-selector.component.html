@@ -1,0 +1,11 @@
+<div *ngIf="locationForm" class="select-box">
+  <label for="location-select" class="label select-box">
+    <span class="label-desc">{{
+      (locationForm && locationForm.value) || 'Select a location'
+    }}</span></label
+  >
+  <select id="location-select" class="select" [formControl]="locationForm">
+    <option *ngIf="locationForm && !locationForm.value" [value]="null"></option>
+    <option *ngFor="let loc of locations" [value]="loc">{{ loc }}</option>
+  </select>
+</div>
